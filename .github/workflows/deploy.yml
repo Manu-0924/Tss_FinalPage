@@ -1,0 +1,28 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main  # Branch you want to deploy from
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0  # Ensure the full history is fetched
+      
+      - name: Build
+        run: |
+          # Add any build steps here if needed
+          echo "Building the project..."
+
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./ # Directory containing the files to publish
+          publish_branch: gh-pages  # Branch in the public repo to deploy to
+          target_repo: Manu-0924/Manu-0924.github.io  # Public repo name
